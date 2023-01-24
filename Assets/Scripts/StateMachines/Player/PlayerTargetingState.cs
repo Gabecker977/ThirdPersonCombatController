@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerTargetingState : PlayerBaseState
 {
+  
   private readonly int TargetingBlendTreeHash=Animator.StringToHash("Targeting Blend Tree");
   private readonly int TargetingForwordHash=Animator.StringToHash("TargetingForword");
   private readonly int TargetingRightHash=Animator.StringToHash("TargetingRight");
@@ -16,6 +17,8 @@ public class PlayerTargetingState : PlayerBaseState
     public override void Enter()
     {
       stateMachine.InputReader.CancelTargetEvent+=OnCancel;
+      stateMachine.InputReader.DodgeEvent+=OnDodge;
+      stateMachine.InputReader.JumpEvent+=OnJump;
       stateMachine.Animator.CrossFadeInFixedTime(TargetingBlendTreeHash,CrossFadeDuration);
     }
     public override void Tick(float deltaTime)
@@ -32,7 +35,7 @@ public class PlayerTargetingState : PlayerBaseState
        if(stateMachine.InputReader.IsBlocking){
         stateMachine.SwitchState(new PlayerBlockState(stateMachine));
        }
-       Vector3 movement = CalculateMovement();
+       Vector3 movement = CalculateMovement(deltaTime);
        Move(movement*stateMachine.TargetMovementSpeed,deltaTime);
        UpdateAnimator(deltaTime);
        FaceTarget();
@@ -42,14 +45,23 @@ public class PlayerTargetingState : PlayerBaseState
     public override void Exit()
     {
      stateMachine.InputReader.CancelTargetEvent-=OnCancel;
+     stateMachine.InputReader.DodgeEvent-=OnDodge;
+     stateMachine.InputReader.JumpEvent-=OnJump;
      stateMachine.Targeter.CancelTarget();
 
     }
     private void OnCancel(){
         stateMachine.SwitchState(new FreeLookState(stateMachine));
     }
+    private void OnDodge(){
+      if(stateMachine.InputReader.MovementValue==Vector2.zero) return;
+      stateMachine.SwitchState(new PlayerDodgeState(stateMachine,stateMachine.InputReader.MovementValue));
+    }
+    private void OnJump(){
+      stateMachine.SwitchState(new PlayerJumpState(stateMachine));
+    }
 
-    private Vector3 CalculateMovement(){
+    private Vector3 CalculateMovement(float deltaTime){
       Vector3 movement =new Vector3();
       movement+=stateMachine.transform.right*stateMachine.InputReader.MovementValue.x;
       movement+=stateMachine.transform.forward*stateMachine.InputReader.MovementValue.y;

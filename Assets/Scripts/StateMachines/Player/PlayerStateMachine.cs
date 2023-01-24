@@ -13,10 +13,14 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField]public float FreeLookMovementSpeed{get;private set;}
     [field: SerializeField]public float TargetMovementSpeed{get;private set;}
     [field: SerializeField]public float RotationSpeed{get;private set;}
+     [field: SerializeField]public float DodgeDuration{get;private set;}
+     [field: SerializeField]public float DodgeDistance{get;private set;}
+     [field: SerializeField]public float JumpForce{get;private set;}
     [field: SerializeField]public Attack[] Attacks{get;private set;}
     [field: SerializeField]public WeaponDamege WeaponDamege{get;private set;}
     [field: SerializeField]public Ragdoll Ragdoll{get;private set;}
     public Transform MainCameraTransform{get;private set;}
+    public float DodgePreviusTime{get;private set;}=Mathf.NegativeInfinity;
    private void Start() {
     MainCameraTransform=Camera.main.transform;
     SwitchState(new FreeLookState(this));
