@@ -19,8 +19,13 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField]public Attack[] Attacks{get;private set;}
     [field: SerializeField]public WeaponDamege WeaponDamege{get;private set;}
     [field: SerializeField]public Ragdoll Ragdoll{get;private set;}
+     [field: SerializeField]public LedgeDetector LedgeDetector{get;private set;}
     public Transform MainCameraTransform{get;private set;}
     public float DodgePreviusTime{get;private set;}=Mathf.NegativeInfinity;
+    private void Awake() {
+        Cursor.lockState=CursorLockMode.Locked;
+        Cursor.visible=false;
+    }
    private void Start() {
     MainCameraTransform=Camera.main.transform;
     SwitchState(new FreeLookState(this));

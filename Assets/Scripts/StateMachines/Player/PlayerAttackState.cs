@@ -22,7 +22,7 @@ public class PlayerAttackState : PlayerBaseState
     {
         Move(deltaTime);
         FaceTarget();
-        float normalizedTime =GetNormalizedTime(stateMachine.Animator);
+        float normalizedTime =GetNormalizedTime(stateMachine.Animator,"Attack");
 
         if(normalizedTime>=attack.ForceTime){
             TryApplyForce();

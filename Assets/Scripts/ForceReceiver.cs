@@ -31,6 +31,11 @@ public class ForceReceiver : MonoBehaviour
             agent.enabled=false;
         }
     }
+    public void ResetGravity()
+    {
+     verticalVelocity=0f;
+     impact=Vector3.zero; 
+    }
     public void Jump(float jumpForce){
         verticalVelocity+=jumpForce;
     }
