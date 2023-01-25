@@ -6,6 +6,7 @@ public class Ragdoll : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private CharacterController characterController;
+    [SerializeField] private Rigidbody hipsRb;
     private Collider[] colliders;
     private Rigidbody[] rigidbodies;
     void Start()
@@ -30,5 +31,9 @@ public class Ragdoll : MonoBehaviour
         }
         characterController.enabled=!isRagdoll;
         animator.enabled=!isRagdoll;
+    }
+    public void ApplyHipsForce(float force){
+        if(hipsRb==null) return;
+        hipsRb.velocity=-hipsRb.transform.forward*force;
     }
 }

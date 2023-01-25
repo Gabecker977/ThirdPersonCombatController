@@ -1585,6 +1585,9 @@ MonoBehaviour:
   <FreeLookMovementSpeed>k__BackingField: 6
   <TargetMovementSpeed>k__BackingField: 3
   <RotationSpeed>k__BackingField: 10
+  <DodgeDuration>k__BackingField: 0
+  <DodgeDistance>k__BackingField: 0
+  <JumpForce>k__BackingField: 0
   <Attacks>k__BackingField:
   - <AnimationName>k__BackingField: Attack Downward
     <TransitionDuration>k__BackingField: 0.1
@@ -1612,6 +1615,7 @@ MonoBehaviour:
     <Knockback>k__BackingField: 0
   <WeaponDamege>k__BackingField: {fileID: 5514922040245618615}
   <Ragdoll>k__BackingField: {fileID: 5916360410563102933}
+  <LedgeDetector>k__BackingField: {fileID: 0}
 --- !u!95 &8668605613983788231
 Animator:
   serializedVersion: 5
@@ -1699,6 +1703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  isInvulnerable: 0
 --- !u!114 &5916360410563102933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1722,6 +1727,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9133927392754077146}
+  - component: {fileID: 8280700976572484271}
   - component: {fileID: 8743287831043192248}
   m_Layer: 0
   m_Name: mixamorig:Hips
@@ -1748,6 +1754,27 @@ Transform:
   m_Father: {fileID: 3644089798389361998}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 8.077582, y: -1.1703119, z: -3.2698076}
+--- !u!65 &8280700976572484271
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4187733836262462639}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3691314, y: 0.2878801, z: 0.27454588}
+  m_Center: {x: -0.00035966933, y: 0.08518146, z: -0.027732044}
 --- !u!54 &8743287831043192248
 Rigidbody:
   m_ObjectHideFlags: 0

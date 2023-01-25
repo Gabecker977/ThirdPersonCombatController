@@ -12,6 +12,7 @@ public class EnemyDeathState : EnemyBaseState
     {
         //toggle rogdoll
         stateMachine.Ragdoll.ToggleRagdoll(true);
+        stateMachine.Ragdoll.ApplyHipsForce(50f);
         stateMachine.Weapon.gameObject.SetActive(false);
         GameObject.Destroy(stateMachine.Target);
     }
